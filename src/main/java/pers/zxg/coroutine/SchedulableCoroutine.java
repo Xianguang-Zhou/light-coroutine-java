@@ -14,7 +14,7 @@ public class SchedulableCoroutine extends Coroutine {
 	public static class OutsideCall extends RuntimeException {
 	}
 
-	public class Scheduler {
+	public static class Scheduler {
 
 		public Scheduler() {
 			throw new Weaver.NotWeaved();
