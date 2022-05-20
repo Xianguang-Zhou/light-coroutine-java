@@ -58,16 +58,28 @@ public class Coroutine {
 	public static class NotSameThread extends RuntimeException {
 	}
 
-	public static class Future<T> {
+	public static interface Future<T> {
+		public boolean isDone();
 
+		public T get() throws Suspend, ExecutionException, OutsideCall;
+
+		public T get(long timeout, TimeUnit unit)
+				throws Suspend, TimeoutException, ExecutionException, SchedulableCoroutine.OutsideCall;
+	}
+
+	public static class Promise<T> implements Future<T> {
+
+		@Override
 		public boolean isDone() {
 			throw new Weaver.NotWeaved();
 		}
 
+		@Override
 		public T get() throws Suspend, ExecutionException, OutsideCall {
 			throw new Weaver.NotWeaved();
 		}
 
+		@Override
 		public T get(long timeout, TimeUnit unit)
 				throws Suspend, TimeoutException, ExecutionException, SchedulableCoroutine.OutsideCall {
 			throw new Weaver.NotWeaved();
@@ -77,7 +89,7 @@ public class Coroutine {
 			throw new Weaver.NotWeaved();
 		}
 
-		public boolean completeExceptionally(Throwable exception) throws NotSameThread {
+		public boolean fail(Throwable cause) throws NotSameThread {
 			throw new Weaver.NotWeaved();
 		}
 	}
