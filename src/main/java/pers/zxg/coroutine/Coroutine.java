@@ -92,6 +92,14 @@ public class Coroutine {
 		public boolean fail(Throwable cause) throws NotSameThread {
 			throw new Weaver.NotWeaved();
 		}
+
+		public static Promise<Void> allOf(Promise<?>... ps) {
+			throw new Weaver.NotWeaved();
+		}
+
+		public static Promise<Object> anyOf(Promise<?>... ps) {
+			throw new Weaver.NotWeaved();
+		}
 	}
 
 	public Coroutine(Runnable runnable) {
